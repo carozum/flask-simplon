@@ -1,10 +1,37 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background-color: rgb(242, 252, 243);
+  color:rgb(7, 69, 63);
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+nav{
+  background-color: rgb(7, 69, 63);
+  color: white;
+}
+nav ul{
+  list-style-type: none;
+  display: flex;
+}
+nav li{
+  padding : 12px;
+}
+nav a{
+  color: white;
+}
+
+
 h1 {
   font-size: 2em;
-  color: turquoise;
+  color: rgb(7, 69, 63);
   text-align: left;
 } 
 
-body {
-  background-color: grey;
-  color: white;
+
+main{
+  padding: 24px;
 }

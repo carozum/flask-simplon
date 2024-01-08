@@ -24,15 +24,25 @@ def index():
         pseudo = request.form['pseudo']
         titre = "Mr" if sexe == "homme" else "Mme"
 
-        new_user = User(prenom=prenom,
-                        nom=nom,
-                        sexe=sexe,
-                        pseudo=pseudo,
-                        titre=titre)
-        db.session.add(new_user)
-        db.session.commit()
+        users = User.query.all()
+        pseudo_list = []
+        for user in users:
+            pseudo_list.append(user.pseudo)
 
-        message = f"Bonjour {titre} {prenom} {nom}, votre nom d'utilisateur est {pseudo}"
+        if pseudo not in pseudo_list:
+            new_user = User(prenom=prenom,
+                            nom=nom,
+                            sexe=sexe,
+                            pseudo=pseudo,
+                            titre=titre)
+            db.session.add(new_user)
+            db.session.commit()
+
+        message = f"Bonjour {titre} {prenom} {nom}, votre nom d'utilisateur est {pseudo}."
+
+        if pseudo in pseudo_list:
+            message += " Vous êtes déjà inscrit sur le site."
+
         return render_template('bienvenue.html', message=message)
 
     return render_template('index.html')

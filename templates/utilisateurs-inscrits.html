@@ -1,27 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'layout.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Utilisateurs Inscrits</title>
-</head>
+{% block title %}
+Utilisateurs inscrits
+{% endblock %}
 
-<body>
-    <h1>Utilisateurs Inscrits</h1>
-    <div class="content">
-        {% for user in users %}
-        <div class="user">
-            <p><b>#{{ user.id }}</b></p>
-            <b>
-                <p class="name">{{ user.nom }} {{ user.prenom }}</p>
-            </b>
-            <p>Sexe: {{ user.sexe }}</p>
-            <p>Pseudo : {{ user.pseudo }}</p>
-            <p>Titre: {{ user.titre }}</p>
-        </div>
-        {% endfor %}
+{% block content %}
+<h1>Utilisateurs Inscrits</h1>
+<div class="content">
+    {% for user in users %}
+    <div class="user">
+        <p><b>#{{ user.id }}</b></p>
+        <b>
+            <p class="name">{{ user.nom }} {{ user.prenom }}</p>
+        </b>
+        <p>Sexe: {{ user.sexe }}</p>
+        <p>Pseudo : {{ user.pseudo }}</p>
+        <p>Titre: {{ user.titre }}</p>
     </div>
-</body>
-
-</html>
+    {% endfor %}
+</div>
+{% endblock %}
