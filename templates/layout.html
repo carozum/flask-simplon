@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Add Plotly CDN for rendering the chart -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <title>{% block title %}
         {% endblock %}</title>
 </head>
@@ -17,6 +19,7 @@
                 <li><a href="{{ url_for('utilisateurs_inscrits') }}">Utilisateurs inscrits</a></li>
                 <li><a href="{{ url_for('logs') }}">Logs</a></li>
                 <li><a href="{{ url_for('form_file') }}">Form File</a></li>
+                <li><a href="{{ url_for('form_chart')}}">Form chart</a></li>
                 <!-- <li><a href="{{ url_for('statistiques') }}">Statistiques</a></li> -->
             </ul>
         </nav>

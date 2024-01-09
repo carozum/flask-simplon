@@ -1,0 +1,54 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Chart
+{% endblock %}
+
+{% block content %}
+
+
+<div id="stockChart"></div>
+    
+    <script>
+        {# Get the dates and prices from Flask route and convert to arrays #}
+        var dates = {{ dates|safe }};
+        var prices = {{ prices|safe }};
+        var symbol = '{{ symbol }}';
+        console.log('Dates:', dates);
+        console.log('Prices:', prices);
+
+        {# Create a Plotly chart using Plotly.newPlot #}
+        var trace = {
+            type: 'scatter',
+            mode: 'lines',
+            x: dates,
+            y: prices,
+            line: {color: 'blue'},
+        };
+        var layout = {
+            title: 'Stock Price Over Time for ' + symbol,
+            xaxis: {title: 'Date'},
+            yaxis: {title: 'Stock Price'},
+        };
+
+        Plotly.newPlot('stockChart', [trace], layout);
+    </script>
+
+
+{% endblock %}
+
+
+<!-- Container for the Plotly chart -->
+<!-- <div id="stockChart"></div>
+
+<script>
+    // Get the base64-encoded image data
+    var imgData = "{{ image }}";
+
+    // Create an Image object from the base64 data
+    var img = new Image();
+    img.src = 'data:image/png;base64,' + imgData;
+
+    // Append the image to the stockChart div
+    document.getElementById('stockChart').appendChild(img);
+</script> -->

@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Form chart
+{% endblock %}
+
+{% block content %}
+<h1>Form Chart</h1>
+<form method="post" action=" {{url_for('form_chart')}} ">
+
+    <label for="companyName">Société recherchée:</label>
+    <input type="text" name="companyName" required><br>
+
+    <input type="submit" value="Valider">
+</form>
+
+{% endblock %}

@@ -6,9 +6,11 @@ import json
 import numpy as np
 import pandas as pd
 
+
 # Eléments pour l'API https://devapi.ai/
 config = dotenv_values(".env")
 AUTH_KEY = config['API_KEY']
+AUTH_KEY_2 = config['API_KEY_chart']
 url_news = 'https://devapi.ai/api/v1/markets/news'
 url_quotes = 'https://devapi.ai/api/v1/markets/quote'
 
@@ -209,6 +211,42 @@ def statistiques():
     return render_template('statistiques.html')
 
 
+url_chart = 'https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=IBM&apikey=demo'
+r = requests.get(url_chart)
+data = r.json()
+
+
+@app.route('/form-chart', methods=['POST', 'GET'])
+def form_chart():
+    if request.method == 'POST':
+        api_key = AUTH_KEY_2
+        try:
+            saisie = request.form['companyName']
+            symbol = trouver_ticker(saisie)
+            endpoint = f'https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY_ADJUSTED&symbol={symbol}&apikey={api_key}'
+
+            response = requests.get(endpoint)
+            data = response.json()
+
+            # Créez le graphique
+            dates = list(data['Monthly Adjusted Time Series'].keys())
+            prices = [float(data['Monthly Adjusted Time Series']
+                            [date]['4. close']) for date in dates]
+            print(dates)
+            print(prices)
+
+            message = "Voici votre graph"
+            return render_template('chart.html', message=message, dates=dates, prices=prices, symbol=symbol)
+
+        except IndexError:
+            image = None
+            print('hello')
+            message = "rien à ce nom"
+            return render_template('chart.html', message=message, dates=[], prices=[], symbol=symbol)
+
+    return render_template('form-chart.html')
+
+
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
@@ -216,11 +254,28 @@ if __name__ == '__main__':
 
 
 # existing_user = User.query.filter_by(pseudo=pseudo).first()
-        # if existing_user is None:
-        #     new_user = User(prenom=prenom, nom=nom, sexe=sexe,
-        #                 pseudo=pseudo, titre=titre)
-        #     db.session.add(new_user)
-        #     db.session.commit()
-        #     return render_template('bienvenue.html', message=message)
-        # else:
-        #     return render_template('index.html')
+# if existing_user is None:
+#     new_user = User(prenom=prenom, nom=nom, sexe=sexe,
+#                 pseudo=pseudo, titre=titre)
+#     db.session.add(new_user)
+#     db.session.commit()
+#     return render_template('bienvenue.html', message=message)
+# else:
+#     return render_template('index.html')
+
+ # # Create a Plotly Express line chart
+
+ # import plotly
+# import plotly.express as px
+# import io
+# import base64
+# fig = px.line(x=dates, y=prices, labels={'x': 'Date', 'y': 'Stock Price'},
+#               title=f'Stock Price Over Time - {symbol}')
+
+# # Save the figure to a BytesIO object
+# img_stream = io.BytesIO()
+# fig.write_image(img_stream, format='png')
+# img_stream.seek(0)
+
+# # Convert the image to base64 for embedding in HTML
+# img_base64 = base64.b64encode(img_stream.read()).decode('utf-8')
