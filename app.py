@@ -1,10 +1,11 @@
 from flask import Flask, render_template, request
-from models import db, User, app
+from models import db, User, app, Log_u
 from dotenv import dotenv_values
 import requests
 import json
 import numpy as np
 import pandas as pd
+import datetime
 
 
 config = dotenv_values(".env")
@@ -67,13 +68,54 @@ def index():
                 news = trouver_api(ticker, url_news)
                 # sortir de l'API les chiffres de valorisation du symbol demandé
                 quotes = trouver_api(ticker, url_quotes)
+                print(quotes)
+                # enregistrer le log dans la base de donnée
+                user = request.form['pseudo']
+                saisie = request.form['companyName']
+                symbol = ticker
+                company = quotes['body']['companyName']
+                exchange = quotes['body']['exchange']
+                lastSalePrice = quotes['body']['primaryData']['lastSalePrice']
+                volume = quotes['body']['primaryData']['volume']
+                percentageChange = quotes['body']['primaryData']['percentageChange']
+                new_log = Log_u(user=user,
+                                created=None,
+                                saisie=saisie,
+                                symbol=symbol,
+                                company=company,
+                                exchange=exchange,
+                                lastSalePrice=lastSalePrice,
+                                volume=volume,
+                                percentageChange=percentageChange)
+                db.session.add(new_log)
+                db.session.commit()
+
                 return render_template('bienvenue.html', message=message, news=news, quotes=quotes, company=company)
             except IndexError:
                 news = {}
                 quotes = {}
-                return render_template('bienvenue.html', message=message, news=news, quotes=quotes)
+                # enregistrer le log dans la base de données
+                user = request.form['pseudo']
+                saisie = request.form['companyName']
+                symbol = 'N/A'
+                company = 'N/A'
+                exchange = 'N/A'
+                lastSalePrice = 'N/A'
+                volume = 'N/A'
+                percentageChange = 'N/A'
+                new_log = Log_u(user=user,
+                                created=None,
+                                saisie=saisie,
+                                symbol=symbol,
+                                company=company,
+                                exchange=exchange,
+                                lastSalePrice=lastSalePrice,
+                                volume=volume,
+                                percentageChange=percentageChange)
+                db.session.add(new_log)
+                db.session.commit()
 
-            # enregistrer le log dans la base de donnée
+                return render_template('bienvenue.html', message=message, news=news, quotes=quotes)
 
     return render_template('index.html')
 
@@ -82,6 +124,12 @@ def index():
 def utilisateurs_inscrits():
     users = User.query.all()
     return render_template("utilisateurs-inscrits.html", users=users)
+
+
+@app.route('/logs.html')
+def logs():
+    logs = Log_u.query.all()
+    return render_template("logs.html", logs=logs)
 
 
 @app.route('/about')

@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Utilisateurs inscrits
+{% endblock %}
+
+{% block content %}
+<h1>Logs enregistrés</h1>
+<div class="content">
+    {% for log in logs %}
+    <div class="log">
+        <p>{{ log.user }}</p>
+        <p>{{ log.created }}</p>
+        <p>{{ log.saisie }}</p>
+        <p>{{ log.lastSalePrice }}</p>
+        <p>{{ log.exchange }}</p>
+        <p>{{ log.company }}</p>
+        <p>{{ log.volume }}</p>
+
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
