@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Formulaire pour upload file
+{% endblock %}
+
+{% block content %}
+<h1>Chargement de fichier</h1>
+<form method="POST" enctype="multipart/form-data">
+    <input type="file" name="file" accept=".csv, .xls, .xlsx">
+    <button type="submit">Obtenir les statistiques</button>
+</form>
+{% endblock %}
