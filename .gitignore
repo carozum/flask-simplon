@@ -2,3 +2,4 @@ env_flask_simplon
 .vscode
 /__pycache__ 
 .DS_Store
+.env
