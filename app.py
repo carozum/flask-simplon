@@ -1,10 +1,13 @@
 from flask import Flask, render_template, request, redirect
+from tensorflow.keras.models import load_model
+from tensorflow.keras.preprocessing import image
 from models import db, User, app, Log_u
 from dotenv import dotenv_values
 import requests
-import json
 import numpy as np
 import pandas as pd
+import numpy as np
+import io
 
 
 # Eléments pour l'API https://devapi.ai/
@@ -13,6 +16,27 @@ AUTH_KEY = config['API_KEY']
 AUTH_KEY_2 = config['API_KEY_chart']
 url_news = 'https://devapi.ai/api/v1/markets/news'
 url_quotes = 'https://devapi.ai/api/v1/markets/quote'
+
+
+# chargement du modèle MNIST de reconnaissance des digits
+model = load_model('model_mnist.h5')
+
+
+"""Function responsible for preparing the image before feeding the model"""
+
+
+def preprocess_image(file):
+    try:
+        img_content = file.read()
+        img = image.load_img(io.BytesIO(img_content),
+                             target_size=(28, 28), color_mode='grayscale')
+        img_array = image.img_to_array(img)
+        img_array = np.expand_dims(img_array, axis=0)
+        img_array /= 255.0
+        return img_array
+    except Exception as e:
+        print(f"Error processing image: {e}")
+        return None
 
 
 """ Fonction qui permet de transformer un nom de company saisi en entréé par l'utilisateur
@@ -206,9 +230,15 @@ def form_file():
     return render_template('form-file.html')
 
 
+"""Route pour afficher les statistiques du fichier. A ajouter le traiment différent des données numériques ou textuelles"""
+
+
 @app.route('/statistiques')
 def statistiques():
     return render_template('statistiques.html')
+
+
+"""Route to display the interactive chart using plotly express"""
 
 
 url_chart = 'https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=IBM&apikey=demo'
@@ -240,11 +270,34 @@ def form_chart():
 
         except IndexError:
             image = None
-            print('hello')
             message = "rien à ce nom"
             return render_template('chart.html', message=message, dates=[], prices=[], symbol=symbol)
 
     return render_template('form-chart.html')
+
+
+"""Route pour permettre à l'utilisateur de télécharger un fichier de digit"""
+
+
+@app.route('/feed-model.html', methods=['POST', 'GET'])
+def feed_model():
+
+    if request.method == 'POST':
+        # Get the uploaded image from the form
+        file = request.files["file"]
+
+        if file:
+            try:
+                img_array = preprocess_image(file)
+                prediction = model.predict(img_array)
+                result = np.argmax(prediction)
+                return render_template("result-model.html", message="Prédiction: {}".format(result))
+            except Exception as e:
+                print(f"Error processing image: {e}")
+                message = "Error"
+                return render_template('result-model.html', message=message)
+
+    return render_template('feed-model.html', message="Téléchargez une image de chiffre à prédire.")
 
 
 if __name__ == '__main__':

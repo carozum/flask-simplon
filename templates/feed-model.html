@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Formulaire pour tester le modèle de reconnaissante de chiffres.
+{% endblock %}
+
+{% block content %}
+
+<h1>MNIST Digit Recognition</h1>
+
+<h1>MNIST Digit Recognition</h1>
+<form method="post" enctype="multipart/form-data">
+    <label for="file">Upload Image:</label>
+    <input type="file" name="file" accept=".png, .jpg, .jpeg" required>
+    <button type="submit">Predict Digit</button>
+</form>
+
+{% endblock %}
