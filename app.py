@@ -97,7 +97,7 @@ def index():
         pseudo = request.form['pseudo']
         titre = "Mr" if sexe == "homme" else "Mme"
         # company = request.form['companyName']
-        message = f"Bonjour {titre} {prenom} {nom}, votre nom d'utilisateur est {pseudo}."
+        message = f"Bonjour {titre} {prenom} {nom} ({pseudo})! "
 
         # Etape 2 - Vérification que le pseudo n'est pas déjà dans la base
         users = User.query.all()
@@ -116,7 +116,7 @@ def index():
             db.session.commit()
 
         if pseudo in pseudo_list:
-            message += " Vous êtes déjà inscrit sur le site."
+            message += " Ravie de vous revoir sur le site."
 
         # TRAVAIL SUR LA COMPANY
 
@@ -192,7 +192,7 @@ def index():
 
 @app.route('/bienvenue')
 def bienvenue():
-    return render_template("bienvenue.html", message="Bonjour!")
+    return render_template("bienvenue.html", message="Accueil du site")
 
 
 """" Route qui affiche les possibilités une fois connecté """

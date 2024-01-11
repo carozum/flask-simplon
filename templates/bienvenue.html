@@ -1,12 +1,92 @@
 {% extends 'layout.html' %}
 
 {% block title %}
-Page de recherche
+Accueil du site
 {% endblock %}
 
+
+{% block h1 %}
+{{ message }}
+{% endblock %}
+
+
 {% block content %}
-<h1>Votre recherche</h1>
-<p>{{ message }}</p>
-<p><a href="{{url_for('infos_company')}}">Me renseigner sur une entreprise</a></p>
+
+<main class="container p-5">
+    <h2 class="h4 pb-5">Voici la liste des services disponibles sur notre site</h2>
+
+    <div class="row">
+        <div class="col-12 col-md-4 ">
+            <div class="card mb-4 shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Company Latest News</h5>
+                    <p class="card-text">Read the news for a company</p>
+                    <a href="{{url_for('infos_company')}}" class="stretched-link"></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-4 ">
+            <div class="card mb-4 shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Company Basic Stats</h5>
+                    <p class="card-text">Basics statistics uploading a file.</p>
+                    <a href="{{url_for('form_file')}}" class="stretched-link"></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-4">
+            <div class="card mb-4 shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Quotation Chart</h5>
+                    <p class="card-text">Interactive Company Quotations Chart</p>
+                    <a href="{{url_for('form_chart')}}" class="stretched-link"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 col-md-4 ">
+            <div class="card mb-4 shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Feed my MNIST</h5>
+                    <p class="card-text">Feed my model with an image file</p>
+                    <a href="{{url_for('feed_model')}}" class="stretched-link"></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-4 ">
+            <div class="card mb-4 shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Draw for MNIST</h5>
+                    <p class="card-text">Make a prediction using a draw.</p>
+                    <a href="{{url_for('draw')}}" class="stretched-link"></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-4">
+            <div class="card  mb-4 shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Backend users list</h5>
+                    <p class="card-text">Consult list of users</p>
+                    <a href="{{url_for('utilisateurs_inscrits')}}" class="stretched-link"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-4 ">
+            <div class="card  mb-4 shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Backend logs list</h5>
+                    <p class="card-text">List of the logs</p>
+                    <a href="{{url_for('logs')}}" class="stretched-link"></a>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
 
 {% endblock %}
