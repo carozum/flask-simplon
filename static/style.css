@@ -41,6 +41,10 @@ main{
 }
 */
 
+#main-bienvenue .card{
+  background-color: #F6F797;
+}
+
 canvas {
   border: 1px solid #000;
 } 

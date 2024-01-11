@@ -4,10 +4,26 @@
 Formulaire pour upload file
 {% endblock %}
 
+{% block h1 %}
+Create your own statistics
+{% endblock %}
+
 {% block content %}
-<h1>Chargement de fichier</h1>
-<form method="POST" enctype="multipart/form-data">
-    <input type="file" name="file" accept=".csv, .xls, .xlsx">
-    <button type="submit">Obtenir les statistiques</button>
-</form>
+
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{url_for('bienvenue')}}">Accueil</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Statistics</li>
+    </ol>
+</nav>
+
+<main class="container p-5 overflow-hidden" style="min-height: 54vh">
+    <h2 class="h4 pb-2">Please upload your file in csv or xls format:</h2>
+
+
+    <form method="POST" enctype="multipart/form-data" class="form-group">
+        <input type="file" name="file" accept=".csv, .xls, .xlsx" id="inputFile">
+        <button type="submit" class="btn btn-primary" id="inputFile">Obtenir les statistiques</button>
+    </form>
+</main>
 {% endblock %}
