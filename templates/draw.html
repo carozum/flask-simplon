@@ -4,20 +4,25 @@
 Draw a digit
 {% endblock %}
 
-
+{% block h1 %}
+Draw to have a prediction
+{% endblock %}
 
 {% block content %}
+<div class="container p-4">
+    <div class="m-auto w-50 text-center">
 
-<canvas id="canvas" width="280" height="280"></canvas>
-<br>
-<form id="prediction-form" onsubmit="predictDigit(); return false;">
-    <input type="hidden" id="url" name="url" value="">
-    <button type="submit">Predict Digit</button>
-</form>
+        <canvas id="canvas" width="280" height="280"></canvas>
+        <br>
+        <form id="prediction-form" onsubmit="predictDigit(); return false;">
+            <input type="hidden" id="url" name="url" value="">
+            <button type="submit" class="btn btn-primary">Predict Digit</button>
+        </form>
 
-Want to see your prediction ...
-<a href="{{ url_for('predict')}}">Abracadabra</a>
-
+        <p class="mt-2">Want to see your prediction ...</p>
+        <a href="{{ url_for('predict')}}" class="btn btn-warning mt-2 ">Abracadabra</a>
+    </div>
+</div>
 
 <script src="{{ url_for('static', filename='js/drawing_app.js') }}"></script>
 
