@@ -5,25 +5,37 @@ Résultats
 {% endblock %}
 
 
+
+{% block h1 %}
+{% if news != {} %}
+Vos actualités pour la société {{company}}
+{% else %}
+Vos actualités
+{% endif %}
+{% endblock %}
+
 {% block content %}
 
 
-<h2>Vos nouvelles</h2>
-{% if news != {} %}
-<ul>
-    {% for item in news.body %}
-    <li>{{ item.description }}</li>
+<main class="container p-5" style="min-height: 62vh">
+    <h2 class="h4 pb-5">Et voici!</h2>
 
-    {% endfor %}
-</ul>
-{% else %}
-<p>La société saisie ne correspond à aucune entrée connue. Veuillez saisir un nom correct</p>
-{% endif %}
+    {% if news != {} %}
+    <ul>
+        {% for item in news.body %}
+        <li>{{ item.description }}</li>
 
-<p>
-    {% if quotes != {} %}
-    The quote as of {{ quotes.body.primaryData.lastTradeTimestamp}} is {{
-    quotes.body.primaryData.lastSalePrice}}
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>La société saisie ne correspond à aucune entrée connue. Veuillez saisir un nom correct</p>
     {% endif %}
-</p>
+
+    <p>
+        {% if quotes != {} %}
+        The quote as of {{ quotes.body.primaryData.lastTradeTimestamp}} is {{
+        quotes.body.primaryData.lastSalePrice}}
+        {% endif %}
+    </p>
+</main>
 {% endblock %}

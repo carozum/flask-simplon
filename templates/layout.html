@@ -42,6 +42,8 @@
 
     {% endblock %}
 
+
+    {% block hero%}
     <div class="hero-page container-fluid bg-light p-5 ">
         <div class="row align-items-center justify-content-center p-3">
             <h1 class="col-md-10 col-lg-6 text-center">
@@ -50,13 +52,14 @@
             </h1>
         </div>
     </div>
+    {% endblock %}
 
 
     {% block content %}
     {% endblock %}
 
     {% block footer%}
-    <footer class="bg-primary text-light text-center pt-3 pb-3 border-top">
+    <footer class="bg-primary text-light text-center pt-3 pb-3 border-top container-fluid">
         Made with enthousiasm by Carozum - jan 2024
     </footer>
     {% endblock %}

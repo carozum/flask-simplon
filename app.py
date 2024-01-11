@@ -233,7 +233,7 @@ def infos_company():
                 db.session.add(new_log)
                 db.session.commit()
 
-                return render_template('resultat-company.html', news=news, quotes=quotes)
+                return render_template('resultat-company.html', news=news, quotes=quotes, company=company)
 
             # Etape 3 Bis : cas ou la company n'existe pas
             except IndexError:
@@ -263,9 +263,9 @@ def infos_company():
                 db.session.commit()
                 session['pseudo'] = pseudo
 
-                return render_template('resultat-company.html', news=news, quotes=quotes)
+                return render_template('resultat-company.html', news=news, quotes=quotes, company=company)
 
-    return render_template('infos-company.html', news={}, quotes={})
+    return render_template('infos-company.html', news={}, quotes={}, company=company)
 
 
 """ Route qui permet d'afficher le contenu de la table User"""
