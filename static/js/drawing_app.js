@@ -4,11 +4,13 @@ var clickX = [];
 var clickY = [];
 var clickDrag = [];
 var paint = false;
-var curColor = "#FF5733";
+var curColor = "#ddd";
 
 function drawCanvas() {
     canvas = document.getElementById('canvas');
     context = canvas.getContext("2d");
+    context.fillStyle = "#000"; 
+    context.fillRect(0, 0, canvas.width, canvas.height);
 
     canvas.addEventListener('mousedown', function (e) {
         var mouseX = e.pageX - this.offsetLeft;
@@ -39,6 +41,8 @@ function addClick(x, y, dragging) {
 
 function redraw() {
     context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+    context.fillStyle = "#000";
+    context.fillRect(0, 0, context.canvas.width, context.canvas.height);
     context.strokeStyle = curColor;
     context.lineJoin = "round";
     context.lineWidth = 3;
