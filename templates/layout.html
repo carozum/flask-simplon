@@ -15,17 +15,29 @@
 <body>
     {% block header %}
     <header>
-        <nav>
-            <ul>
-                <li><a href="{{ url_for('index') }}">Home</a></li>
-                <li><a href="{{ url_for('utilisateurs_inscrits') }}">Utilisateurs inscrits</a></li>
-                <li><a href="{{ url_for('logs') }}">Logs</a></li>
-                <li><a href="{{ url_for('form_file') }}">Form File</a></li>
-                <li><a href="{{ url_for('form_chart')}}">Form chart</a></li>
-                <li><a href="{{ url_for('feed_model')}}">Feed Model</a></li>
-                <li><a href="{{ url_for('draw')}}">Draw</a></li>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{{ url_for('index') }}">@carozum</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
 
-            </ul>
+                        <a class="nav-link " aria-current="page" href="{{ url_for('bienvenue') }}">Accueil</a>
+                        <a class="nav-link" aria-current="page" href="{{ url_for('infos_company') }}">Infos
+                            Company</a>
+                        <a class="nav-link" href="{{ url_for('form_file') }}">Statistiques</a>
+                        <a class="nav-link" href="{{ url_for('form_chart') }}">Quotations</a>
+                        <a class="nav-link" href="{{ url_for('feed_model') }}">Feed Mnist</a>
+                        <a class="nav-link" href="{{ url_for('draw') }}">Drawing Mnist</a>
+                        <a class="nav-link" href="{{ url_for('utilisateurs_inscrits') }}">Backend-users</a>
+                        <a class="nav-link" href="{{ url_for('logs') }}">Backend-logs</a>
+                    </div>
+                </div>
+            </div>
         </nav>
     </header>
     {% endblock %}
@@ -39,6 +51,7 @@
         Made with enthousiasm by Carozum - jan 2024
     </footer>
     {% endblock %}
+    <script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
 </body>
 
 </html>
