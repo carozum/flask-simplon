@@ -1,14 +1,19 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, jsonify, session
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 from models import db, User, app, Log_u
 from dotenv import dotenv_values
+from PIL import Image
 import requests
 import numpy as np
 import pandas as pd
 import numpy as np
 import io
+import re
+import base64
+import secrets
 
+app.secret_key = secrets.token_hex(16)
 
 # Eléments pour l'API https://devapi.ai/
 config = dotenv_values(".env")
@@ -298,6 +303,43 @@ def feed_model():
                 return render_template('result-model.html', message=message)
 
     return render_template('feed-model.html', message="Téléchargez une image de chiffre à prédire.")
+
+
+@app.route('/draw', methods=['GET', 'POST'])
+def draw():
+    prediction = None
+
+    if request.method == 'POST':
+        url = request.form['url']
+
+        # Extract base64 data from the URL
+        image_data = re.sub('^data:image/.+;base64,', '', url)
+        image_data = image_data.encode('utf-8')
+
+        # Convert base64 data to image
+        img = Image.open(io.BytesIO(base64.b64decode(image_data))).convert('L')
+        img = img.resize((28, 28))
+        img_array = np.array(img) / 255.0
+        img_array = np.reshape(img_array, (1, 28, 28, 1))
+
+        # Make prediction
+        predictions = model.predict(img_array)
+        predicted_class = np.argmax(predictions)
+
+        # Convert to int if needed
+        prediction = int(predicted_class)
+        print(prediction)
+        session['prediction'] = prediction
+
+    return render_template('draw.html', prediction=prediction)
+
+
+@app.route('/predict')
+def predict():
+    # Retrieve the prediction from the session
+    prediction = session.get('prediction', None)
+
+    return render_template('predict.html', prediction=prediction)
 
 
 if __name__ == '__main__':

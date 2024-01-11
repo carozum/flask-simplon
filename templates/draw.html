@@ -1,0 +1,25 @@
+{% extends 'layout.html'%}
+
+{% block title %}
+Draw a digit
+{% endblock %}
+
+
+
+{% block content %}
+
+<canvas id="canvas" width="280" height="280"></canvas>
+<br>
+<form id="prediction-form" onsubmit="predictDigit(); return false;">
+    <input type="hidden" id="url" name="url" value="">
+    <button type="submit">Predict Digit</button>
+</form>
+
+{% if prediction %}
+<p>Predicted Digit: {{ prediction }}</p>
+{% endif %}
+
+
+<script src="{{ url_for('static', filename='js/drawing_app.js') }}"></script>
+
+{% endblock %}'

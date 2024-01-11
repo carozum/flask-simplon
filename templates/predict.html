@@ -1,0 +1,17 @@
+{% extends 'layout.html'%}
+
+{% block title %}
+Draw a digit
+{% endblock %}
+
+
+
+{% block content %}
+
+{% if prediction is not none %}
+<p>Predicted Digit: {{ prediction }}</p>
+{% else %}
+<p>No prediction available</p>
+{% endif %}
+
+{% endblock %}'
