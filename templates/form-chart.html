@@ -18,11 +18,11 @@ Company quotation Form
     </ol>
 </nav>
 
-<main class="container p-5 overflow-hidden" style="min-height: 54vh">
+<main class="container p-5 overflow-hidden" style="min-height: 56vh">
     <h2 class="h4 pb-2">Choisir le nom de la société</h2>
     <div class="row">
         <div class="col">
-            <form method="post" action=" {{url_for('form_chart')}} ">
+            <form method="post" action=" {{url_for('form_chart')}} " class="border p-2 bg-light text-dark rounded">
 
                 <label for="companyName" class="form-label">Société recherchée:</label>
                 <input type="text" name="companyName" class="form-action" required><br>

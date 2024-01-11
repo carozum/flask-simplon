@@ -9,9 +9,18 @@ Draw to have a prediction
 {% endblock %}
 
 {% block content %}
-<div class="container p-4">
+<nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{{url_for('bienvenue')}}">Accueil</a>
+            <a href="{{url_for('form_chart')}}"> Draw</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Quotations chart</li>
+    </ol>
+</nav>
+<main class="container p-4" style="min-height:56vh">
     <div class="m-auto w-50 text-center">
-
+        <p>Draw a digit between 0 and 9 on the canvas...</p>
         <canvas id="canvas" width="280" height="280"></canvas>
         <br>
         <form id="prediction-form" onsubmit="predictDigit(); return false;">
@@ -22,7 +31,7 @@ Draw to have a prediction
         <p class="mt-2">Want to see your prediction ...</p>
         <a href="{{ url_for('predict')}}" class="btn btn-warning mt-2 ">Abracadabra</a>
     </div>
-</div>
+</main>
 
 <script src="{{ url_for('static', filename='js/drawing_app.js') }}"></script>
 

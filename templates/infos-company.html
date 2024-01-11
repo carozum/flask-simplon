@@ -1,7 +1,12 @@
 {% extends 'layout.html' %} {% block title %} Recherche company {% endblock %}
 {% block h1%} Latest News {% endblock %} {% block content %}
-
-<main class="container p-5" style="min-height: 62vh">
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{{url_for('bienvenue')}}">Accueil</a></li>
+    <li class="breadcrumb-item active" aria-current="page">News</li>
+  </ol>
+</nav>
+<main class="container p-4" style="min-height: 56vh">
   <h2 class="h4 pb-5">
     Quel est le nom de la société dont vous voulez connaitre les dernières
     actualités?
