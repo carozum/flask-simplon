@@ -4,12 +4,37 @@
 Statistiques
 {% endblock %}
 
-{% block content %}
+{% block h1%}
+Statistiques issues de votre fichier
+{% endblock %}
 
-<h1>Statistiques</h1>
-<ul>
-    {% for key, value in statistics.items() %}
-    <li><strong>{{ key }}:</strong> {{ value }}</li>
-    {% endfor %}
-</ul>
+{% block content %}
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{url_for('bienvenue')}}">Accueil</a></li>
+        <li class="breadcrumb-item"><a href="{{url_for('form_file')}}">Download Page</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Statistics</li>
+    </ol>
+</nav>
+
+<main class="container p-4 overflow-hidden" style="min-height: 54vh">
+    <h2 class="h4 pb-2">Voici un résumé de vos données</h2>
+    <h3 class="h5">Data Shape</h3>
+    <ul>
+        {% for key, value in statistics.items() %}
+        <li><strong>{{ key }}:</strong> {{ value }}</li>
+        {% endfor %}
+    </ul>
+
+    <h3 class="h5">Data Describe</h3>
+    <div class="table-responsive w-100">
+        <table class="table table-bordered table-striped">
+            {{describe_table| safe}}
+        </table>
+    </div>
+
+</main>
+
+
+
 {% endblock %}

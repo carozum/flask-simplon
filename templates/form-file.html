@@ -13,17 +13,19 @@ Create your own statistics
 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{url_for('bienvenue')}}">Accueil</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Statistics</li>
+        <li class="breadcrumb-item active" aria-current="page">File download</li>
     </ol>
 </nav>
 
 <main class="container p-5 overflow-hidden" style="min-height: 54vh">
-    <h2 class="h4 pb-2">Please upload your file in csv or xls format:</h2>
+    <h2 class="h4 pb-2">Please download your file in csv or xls format:</h2>
+    <p>Notre générateur de statistiques fonctionne essentiellement avec des données numériques. Veillez à ce que le
+        dataset téléchargé en contienne.</p>
 
 
-    <form method="POST" enctype="multipart/form-data" class="form-group">
-        <input type="file" name="file" accept=".csv, .xls, .xlsx" id="inputFile">
-        <button type="submit" class="btn btn-primary" id="inputFile">Obtenir les statistiques</button>
+    <form method="POST" enctype="multipart/form-data" class="text-center">
+        <input type="file" name="file" accept=".csv, .xls, .xlsx" id="inputFile" class="mb-2 form-control">
+        <button type="submit" class="btn btn-primary " id="inputFile">Obtenir les statistiques</button>
     </form>
 </main>
 {% endblock %}

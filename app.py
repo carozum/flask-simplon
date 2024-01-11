@@ -73,8 +73,6 @@ def compute_statistics(data):
     statistics = {
         'Nombre de lignes': len(data),
         'Nombre de colonnes': len(data.columns),
-        'Moyenne': data.mean().to_dict(),
-        'Écart-type': data.std().to_dict(),
         'Valeurs manquantes': data.isnull().sum().to_dict(),
     }
     return statistics
@@ -244,14 +242,19 @@ def form_file():
                     data = pd.read_excel(file)
                 else:
                     return render_template('error.html', message='Format de fichier non pris en charge.')
+                # Create HTML table for data.info()
 
                 statistics = compute_statistics(data)
-                return render_template('statistiques.html', statistics=statistics)
+
+                # Create HTML table for data.describe()
+                describe_table = data.describe().transpose().to_html()
+
+                return render_template('statistiques.html', statistics=statistics, describe_table=describe_table)
 
             except Exception as e:
                 return render_template('error.html', message=f'Une erreur s\'est produite : {str(e)}')
 
-    return render_template('form-file.html')
+    return render_template('form-file.html', )
 
 
 """Route pour afficher les statistiques du fichier. A ajouter le traiment différent des données numériques ou textuelles"""
