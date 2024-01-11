@@ -4,28 +4,42 @@
 Home page
 {% endblock %}
 
+{% block header %}
+
+{% endblock %}
+
 {% block content %}
-<h1>Home Page</h1>
-<form method="post" action=" . ">
-    <label for="prenom">Prénom:</label>
-    <input type="text" name="prenom" required><br>
+<main id="hero" class="container-fluid bg-primary text-light pb-3 pt-5">
+    <div class="row align-items-center justify-content-center">
+        <div class="col col-sm-10 col-md-8 col-lg6">
+            <h1 class="text-center m-3">The App by Carozum @Simplon Bayonne</h1>
+            <p>Veuillez vous identifier : </p>
+            <form method="post" action=" . " class="border p-2 bg-light text-dark rounded">
+                <label for="prenom" class="form-label">Prénom:</label>
+                <input type="text" name="prenom" class="form-control" required><br>
 
-    <label for="nom">Nom:</label>
-    <input type="text" name="nom" required><br>
+                <label for="nom" class="form-label">Nom:</label>
+                <input type="text" name="nom" class="form-control" required><br>
 
-    <label for="sexe">Sexe:</label>
-    <select name="sexe" required>
-        <option value="homme">Homme</option>
-        <option value="femme">Femme</option>
-    </select><br>
+                <label for="sexe" class="form-label">Sexe:</label>
+                <select name="sexe" class="form-control" required>
+                    <option value="homme">Homme</option>
+                    <option value="femme">Femme</option>
+                </select><br>
 
-    <label for="pseudo">Pseudo:</label>
-    <input type="text" name="pseudo" required><br>
+                <label for="pseudo" class="form-label">Pseudo:</label>
+                <input type="text" class="form-control" name="pseudo" required><br>
 
-    <label for="companyName">Société recherchée:</label>
-    <input type="text" name="companyName" required><br>
+                <label for="companyName" class="form-label">Société recherchée:</label>
+                <input type="text" class="form-control" name="companyName" required><br>
 
-    <input type="submit" value="Valider">
-</form>
+                <input type="submit" value="Valider" class="btn btn-primary">
+            </form>
+        </div>
+    </div>
 
+</main>
+
+{% endblock %}
+{% block footer %}
 {% endblock %}
