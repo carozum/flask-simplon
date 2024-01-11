@@ -4,14 +4,34 @@
 Form chart
 {% endblock %}
 
+
+{% block h1 %}
+Company quotation Form
+{% endblock %}
+
+
 {% block content %}
-<h1>Form Chart</h1>
-<form method="post" action=" {{url_for('form_chart')}} ">
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{url_for('bienvenue')}}">Accueil</a></li>
+        <li class="breadcrumb-item active" aria-current="page">File download</li>
+    </ol>
+</nav>
 
-    <label for="companyName">Société recherchée:</label>
-    <input type="text" name="companyName" required><br>
+<main class="container p-5 overflow-hidden" style="min-height: 54vh">
+    <h2 class="h4 pb-2">Choisir le nom de la société</h2>
+    <div class="row">
+        <div class="col">
+            <form method="post" action=" {{url_for('form_chart')}} ">
 
-    <input type="submit" value="Valider">
-</form>
+                <label for="companyName" class="form-label">Société recherchée:</label>
+                <input type="text" name="companyName" class="form-action" required><br>
+                <input type="submit" value="Valider" class="btn btn-primary">
+            </form>
+        </div>
+    </div>
+
+</main>
+
 
 {% endblock %}

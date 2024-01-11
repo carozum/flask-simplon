@@ -1,45 +1,53 @@
-{% extends 'layout.html' %}
+{% extends 'layout.html' %} {% block title %} Interactive quotation chart of {{ symbol }} {% endblock %} {% block h1%}
+Quotations Chart {% endblock%} {% block content %}
+<nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a href="{{url_for('bienvenue')}}">Accueil</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Quotations chart</li>
+  </ol>
+</nav>
 
-{% block title %}
-Chart
-{% endblock %}
+<main class="container p-2 overflow-hidden" style="min-height: 54vh">
 
-{% block content %}
+  <div id="stockChart"></div>
+</main>
 
+  <script>
+    {# Get the dates and prices from Flask route and convert to arrays #}
+    var dates = {{ dates| safe }};
+    var prices = {{ prices| safe }};
+    var symbol = '{{ symbol }}';
+    console.log('Dates:', dates);
+    console.log('Prices:', prices);
 
-<div id="stockChart"></div>
-    
-    <script>
-        {# Get the dates and prices from Flask route and convert to arrays #}
-        var dates = {{ dates|safe }};
-        var prices = {{ prices|safe }};
-        var symbol = '{{ symbol }}';
-        console.log('Dates:', dates);
-        console.log('Prices:', prices);
-
-        {# Create a Plotly chart using Plotly.newPlot #}
-        var trace = {
-            type: 'scatter',
-            mode: 'lines',
-            x: dates,
-            y: prices,
-            line: {color: 'blue'},
-        };
-        var layout = {
-            title: 'Stock Price Over Time for ' + symbol,
-            xaxis: {title: 'Date'},
-            yaxis: {title: 'Stock Price'},
-        };
-
-        Plotly.newPlot('stockChart', [trace], layout);
-    </script>
+    {# Create a Plotly chart using Plotly.newPlot #}
+    var trace = {
+        type: 'scatter',
+        mode: 'lines',
+        x: dates,
+        y: prices,
+        line: { color: 'blue' },
+    };
+    var layout = {
+        title: 'Stock Price Over Time for ' + symbol,
+        xaxis: { title: 'Date' },
+        yaxis: { title: 'Stock Price' },
+        {# pour tester la responsivité, changer la taille de l'écran et recherger la page #}
+        autosize: true,
+        margin: { t: 80, b: 80, l: 80, r: 80 },
+        responsive: true,
+    };
 
 
-{% endblock %}
+    Plotly.newPlot('stockChart', [trace], layout);
+  </script>
 
+  {% endblock %}
 
-<!-- Container for the Plotly chart -->
-<!-- <div id="stockChart"></div>
+  <!-- Container for the Plotly chart -->
+  <!-- <div id="stockChart"></div>
 
 <script>
     // Get the base64-encoded image data
@@ -52,3 +60,4 @@ Chart
     // Append the image to the stockChart div
     document.getElementById('stockChart').appendChild(img);
 </script> -->
+</main>
