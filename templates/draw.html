@@ -15,9 +15,8 @@ Draw a digit
     <button type="submit">Predict Digit</button>
 </form>
 
-{% if prediction %}
-<p>Predicted Digit: {{ prediction }}</p>
-{% endif %}
+Want to see your prediction ...
+<a href="{{ url_for('predict')}}">Abracadabra</a>
 
 
 <script src="{{ url_for('static', filename='js/drawing_app.js') }}"></script>
