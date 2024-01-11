@@ -118,71 +118,8 @@ def index():
         if pseudo in pseudo_list:
             message += " Ravie de vous revoir sur le site."
 
-        # TRAVAIL SUR LA COMPANY
-
-        # if company is not None:
-        #     try:
-        #         # Etape 3 : cas ou la company existe
-        #         ticker = trouver_ticker(company)
-        #         # Etape 4 : sortir de l'API les news concernant le ticker (symbol) demandé
-        #         news = trouver_api(ticker, url_news)
-        #         # Etape 5 : sortir de l'API les chiffres de valorisation du symbol demandé
-        #         quotes = trouver_api(ticker, url_quotes)
-        #         print(quotes)
-        #         # Etape 6 : enregistrer le log dans la base de donnée
-        #         user = request.form['pseudo']
-        #         saisie = request.form['companyName']
-        #         symbol = ticker
-        #         company = quotes['body']['companyName']
-        #         exchange = quotes['body']['exchange']
-        #         lastSalePrice = quotes['body']['primaryData']['lastSalePrice']
-        #         volume = quotes['body']['primaryData']['volume']
-        #         percentageChange = quotes['body']['primaryData']['percentageChange']
-        #         new_log = Log_u(user=user,
-        #                         created=None,
-        #                         saisie=saisie,
-        #                         symbol=symbol,
-        #                         company=company,
-        #                         exchange=exchange,
-        #                         lastSalePrice=lastSalePrice,
-        #                         volume=volume,
-        #                         percentageChange=percentageChange)
-        #         db.session.add(new_log)
-        #         db.session.commit()
-
-        #         return render_template('bienvenue.html', message=message, news=news, quotes=quotes, company=company)
-
-        #     # Etape 3 Bis : cas ou la company n'existe pas
-        #     except IndexError:
-
-        #         # Etape 4 Bis :  news est un dictionnaire vide
-        #         news = {}
-        #         # Etape 5 Bis : quotes est une dictionnaire vide
-        #         quotes = {}
-        #         # Etape 6 Bis : enregistrer le log dans la base de données
-        #         user = request.form['pseudo']
-        #         saisie = request.form['companyName']
-        #         symbol = 'N/A'
-        #         company = 'N/A'
-        #         exchange = 'N/A'
-        #         lastSalePrice = 'N/A'
-        #         volume = 'N/A'
-        #         percentageChange = 'N/A'
-        #         new_log = Log_u(user=user,
-        #                         created=None,
-        #                         saisie=saisie,
-        #                         symbol=symbol,
-        #                         company=company,
-        #                         exchange=exchange,
-        #                         lastSalePrice=lastSalePrice,
-        #                         volume=volume,
-        #                         percentageChange=percentageChange)
-        #         db.session.add(new_log)
-        #         db.session.commit()
-
-            # return render_template('bienvenue.html', message=message, news=news, quotes=quotes)
-            session['pseudo'] = pseudo
-            return render_template('bienvenue.html', message=message)
+        session['pseudo'] = pseudo
+        return render_template('bienvenue.html', message=message)
 
     return render_template('index.html')
 
@@ -261,11 +198,10 @@ def infos_company():
                                 percentageChange=percentageChange)
                 db.session.add(new_log)
                 db.session.commit()
-                session['pseudo'] = pseudo
 
-                return render_template('resultat-company.html', news=news, quotes=quotes, company=company)
+                return render_template('resultat-company.html', news=news, quotes=quotes, company="")
 
-    return render_template('infos-company.html', news={}, quotes={}, company=company)
+    return render_template('infos-company.html', news={}, quotes={}, company="")
 
 
 """ Route qui permet d'afficher le contenu de la table User"""
