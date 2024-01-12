@@ -4,19 +4,48 @@
 Utilisateurs inscrits
 {% endblock %}
 
+{% block h1 %}
+Utilisateurs Inscrits
+{% endblock%}
+
 {% block content %}
-<h1>Utilisateurs Inscrits</h1>
-<div class="content">
-    {% for user in users %}
-    <div class="user">
-        <p><b>#{{ user.id }}</b></p>
-        <b>
-            <p class="name">{{ user.nom }} {{ user.prenom }}</p>
-        </b>
-        <p>Sexe: {{ user.sexe }}</p>
-        <p>Pseudo : {{ user.pseudo }}</p>
-        <p>Titre: {{ user.titre }}</p>
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{url_for('bienvenue')}}">Accueil</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Utilisateurs</li>
+    </ol>
+</nav>
+
+<main class="container p-4 overflow-hidden" style="min-height: 56vh">
+    <h2 class="h4 pb-2">Liste des utilisateurs inscrits</h2>
+    <div class="content">
+        <table class="table table-striped table-responsive">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Sex</th>
+                    <th>Pseudo</th>
+                    <th>Title</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.nom }}</td>
+                    <td>{{ user.prenom }}</td>
+                    <td>{{ user.sexe }}</td>
+                    <td>{{ user.pseudo }}</td>
+                    <td>{{ user.titre }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
     </div>
-    {% endfor %}
-</div>
+
+</main>
+
 {% endblock %}

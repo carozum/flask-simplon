@@ -1,13 +1,26 @@
 {% extends 'layout.html' %}
 
 {% block title %}
-Formulaire pour tester le modèle de reconnaissante de chiffres.
+Reconnaissance de chiffres.
+{% endblock %}
+
+{% block h1 %}
+Reconnaissance de chiffres
 {% endblock %}
 
 {% block content %}
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{url_for('bienvenue')}}">Accueil</a></li>
+        <li class="breadcrumb-item"><a href="{{url_for('feed_model')}}">Download Page</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Prédiction</li>
+    </ol>
+</nav>
 
-<h1>MNIST Digit Recognition</h1>
-
-<p>{{ message }}</p>
+<main class="container p-4 overflow-hidden text-center" style="min-height: 56vh">
+    <h2 class="h4 pb-2">MNIST Digit Recognition</h2>
+    <p class="text-danger h4">Votre {{ message }}</p>
+    <p class="pt-3">Est ce la bonne réponse ?</p>
+</main>
 
 {% endblock %}

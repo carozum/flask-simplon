@@ -1,23 +1,56 @@
 {% extends 'layout.html' %}
 
 {% block title %}
-Utilisateurs inscrits
+Logs Réalisés
 {% endblock %}
 
+{% block h1 %}
+Logs Réalisés
+{% endblock%}
+
+
 {% block content %}
-<h1>Logs enregistrés</h1>
-<div class="content">
-    {% for log in logs %}
-    <div class="log">
-        <p>{{ log.user }}</p>
-        <p>{{ log.created }}</p>
-        <p>{{ log.saisie }}</p>
-        <p>{{ log.lastSalePrice }}</p>
-        <p>{{ log.exchange }}</p>
-        <p>{{ log.company }}</p>
-        <p>{{ log.volume }}</p>
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{url_for('bienvenue')}}">Accueil</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Logs List</li>
+    </ol>
+</nav>
+
+<main class="container p-4 overflow-hidden" style="min-height: 56vh">
+    <h2 class="h4 pb-2">Liste des Logs Réalisés</h2>
+    <div class="content">
+        <table class="table table-striped table-responsive w-100">
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Date</th>
+                    <th>Saisie</th>
+                    <th>Price</th>
+                    <th>Exchange</th>
+                    <th>Company</th>
+                    <th>Volume</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for log in logs %}
+                <tr>
+                    <td>{{ log.user }}</td>
+                    <td>{{ log.created.strftime("%Y-%m-%d %H:%M") }}</td>
+                    <td>{{ log.saisie }}</td>
+                    <td>{{ log.lastSalePrice }}</td>
+                    <td>{{ log.exchange }}</td>
+                    <td>{{ log.company }}</td>
+                    <td>{{ log.volume }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
 
     </div>
-    {% endfor %}
-</div>
+
+</main>
+
+
+
 {% endblock %}

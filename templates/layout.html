@@ -4,8 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap.min.css')}}">
+    <!-- custom style sheet -->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <!-- favicon -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='Stars.png') }}">
+
     <!-- Add Plotly CDN for rendering the chart -->
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <title>{% block title %}
@@ -17,23 +22,40 @@
     <header>
         <nav class="navbar navbar-expand-md navbar-dark bg-primary ">
             <div class="container-fluid ">
-                <a class="navbar-brand" href="{{ url_for('index') }}">@carozum</a>
+                <a class="navbar-brand" href="{{ url_for('index') }}" style="color: #1B9BD7">
+                    <img src="{{url_for('static', filename='Stars.png')}}" alt="" width="30" height="30">carozum
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
                     aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div class="navbar-nav">
+                    <div class="navbar-nav ml-auto">
 
-                        <a class="nav-link pl-5" aria-current="page" href="{{ url_for('bienvenue') }}">Accueil</a>
-                        <a class="nav-link pl-3" aria-current="page" href="{{ url_for('infos_company') }}">News</a>
-                        <a class="nav-link pl-3" href="{{ url_for('form_file') }}">Stats</a>
-                        <a class="nav-link pl-3" href="{{ url_for('form_chart') }}">Quotations</a>
-                        <a class="nav-link pl-3" href="{{ url_for('feed_model') }}">Feed</a>
-                        <a class="nav-link pl-3" href="{{ url_for('draw') }}">Draw</a>
-                        <a class="nav-link pl-3" href="{{ url_for('utilisateurs_inscrits') }}">Users</a>
-                        <a class="nav-link pl-3" href="{{ url_for('logs') }}">Logs</a>
+                        <a class="nav-link pl-3 {% if request.path == url_for('bienvenue') %}active{% endif %}"
+                            aria-current="page" href="{{ url_for('bienvenue') }}">Accueil</a>
+
+                        <a class="nav-link pl-3 {% if request.path == url_for('infos_company') %}active{% endif %}"
+                            aria-current="page" href="{{ url_for('infos_company') }}">News</a>
+
+                        <a class="nav-link pl-3 {% if request.path == url_for('form_file') %}active{% endif %}"
+                            href="{{ url_for('form_file') }}">Stats</a>
+
+                        <a class="nav-link pl-3 {% if request.path == url_for('form_chart') %}active{% endif %}"
+                            href="{{ url_for('form_chart') }}">Quotations</a>
+
+                        <a class="nav-link pl-3 {% if request.path == url_for('feed_model') %}active{% endif %}"
+                            href="{{ url_for('feed_model') }}">Feed</a>
+
+                        <a class="nav-link pl-3 {% if request.path == url_for('draw') %}active{% endif %}"
+                            href="{{ url_for('draw') }}">Draw</a>
+
+                        <a class="nav-link pl-3 {% if request.path == url_for('utilisateurs_inscrits') %}active{% endif %}"
+                            href="{{ url_for('utilisateurs_inscrits') }}">Users</a>
+
+                        <a class="nav-link pl-3 {% if request.path == url_for('logs') %}active{% endif %}"
+                            href="{{ url_for('logs') }}">Logs</a>
                     </div>
                 </div>
             </div>

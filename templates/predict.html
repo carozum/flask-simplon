@@ -1,17 +1,32 @@
 {% extends 'layout.html'%}
 
 {% block title %}
-Draw a digit
+Reconnaissance d'un digit sur une image
 {% endblock %}
 
-
+{% block h1 %}
+Reconnaissance d'un chiffre sur une image
+{% endblock %}
 
 {% block content %}
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{url_for('bienvenue')}}">Accueil</a></li>
+        <li class="breadcrumb-item"><a href="{{url_for('feed_model')}}">Download Image</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Lecture de l'image</li>
+    </ol>
+</nav>
 
-{% if prediction is not none %}
-<p>Predicted Digit: {{ prediction }}</p>
-{% else %}
-<p>No prediction available</p>
-{% endif %}
+<main class="container p-4 overflow-hidden text-center" style="min-height: 50vh">
+    <h2 class="h4 pb-2">MNIST Digit Recognition</h2>
 
-{% endblock %}'
+    {% if prediction is not none %}
+    <p class="text-danger h4">Predicted Digit: {{ prediction }}</p>
+    <p class="pt-3 ">Est ce la bonne réponse ?</p>
+    <p>Si vous voulez vous pouvez retenter votre chance...</p>
+    {% else %}
+    <p class="text-danger h4">No prediction available</p>
+    {% endif %}
+</main>
+
+{% endblock %}
