@@ -284,6 +284,7 @@ def form_chart():
 
             response = requests.get(endpoint)
             data = response.json()
+            print(data)
 
             # Créez le graphique
             dates = list(data['Monthly Adjusted Time Series'].keys())
@@ -362,6 +363,11 @@ def predict():
     prediction = session.get('prediction', None)
 
     return render_template('predict.html', prediction=prediction)
+
+
+@app.route('/about.html')
+def about():
+    return render_template('about.html')
 
 
 if __name__ == '__main__':

@@ -1,0 +1,111 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+A propos
+{% endblock %}
+
+
+{% block h1 %}
+Projet Flask Data Science
+{% endblock %}
+
+
+{% block content %}
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{url_for('bienvenue')}}">Accueil</a></li>
+        <li class="breadcrumb-item active" aria-current="page">A propos</li>
+    </ol>
+</nav>
+
+<main class="container p-5 overflow-hidden" style="min-height: 56vh">
+    <h2 class="h4 pb-2 ">Caroline Zumbiehl - Ecole Micosoft IA by Simplon Bayonne</h2>
+    <p class="h5 text-center"></p>
+    <div class="row">
+        <div class="col">
+            <h3>Stack utilisés</h3>
+            <ul>
+                <li>Back: Python</li>
+                <li>Framework web: Flask </li>
+                <li>Templating: Jinja + création layout</li>
+                <li>ORM: SqlAlchemy</li>
+                <li>Base de données: SQlite</li>
+                <li>Front: html5, css3, js</li>
+                <li>Data Viz: </li>
+                <li>Machine learning: TensorFlow, </li>
+            </ul>
+
+            <h3>Mise en place d'interactions avec l'utilisateur</h3>
+            <ul>
+                <li>Formulaire html</li>
+                <li>Récupération des infos ou fichiers saisis dans les routes</li>
+                <li>Exploitation des infos pour MAJ des pages</li>
+                <li>Utilisation de variables de session</li>
+                <li>Enregistrement des utilisateurs (back end)</li>
+                <li>Enregistrement des logs en passant par une variable de session (dictionnaire) pour garder la trace
+                    des pseudos lors de l'enregistrement de la company.</li>
+            </ul>
+
+
+            <h3>Requêtage d'API</h3>
+            <ul>
+                <li><a href="https://devapi.ai/">DevAPI</a> Attention, limitation à 100 requêtes par mois. Si le code ne
+                    fonctionne pas ouvrir un nouveau compte avec une nouvelle adresse mail pour générer une nouvelle
+                    clé.</li>
+                <li><a href="https://www.alphavantage.co/documentation/">AlphaVantage</a> Attention limitation à 25
+                    requêtes par jour. Si le cod ne fonctionne pas... retenter demain. </li>
+                <li>Gestion de la sécurité des clés API gérées comme variable d'environnement en les placant dans le
+                    dossier .env/ lui même placé dans le git
+                    ignore. Puis utilisation du package dotenv. </li>
+                <li>Récupération de json pour les news et les quotations.</li>
+                <li>Ajout d'une fonctionnalité de recherche du code ticker ou symbol à partir du mot saisi par
+                    l'utilisateur (à affiner éventuellement en ajoutant un sous niveau proposant tous les choix
+                    trouvés). Pour le moment, la fonction renvoie la première valeur.</li>
+            </ul>
+
+            <h3>Visualisation de données</h3>
+            <ul>
+                <li>Pandas pour la création de dataframe</li>
+                <li>Plotly / plotly express pour les charts.</li>
+                <li>Code créé en JS pour garder l'interactivité au niveau du graphique</li>
+                <li>Focus responsivité</li>
+                <li>Formulaire de téléchargement de fichiers.</li>
+            </ul>
+
+            <h3>Mise en place d'un outil de classification d'images (digits MNIST)</h3>
+            <ul>
+                <li>Bases d'images de digit MNIST keras (70Kimages)</li>
+                <li>Création d'un modèle CNN et entrainement</li>
+                <li>Taux d'accuracy 98%</li>
+                <li>Réalisation d'un programme de génération d'images digit selon plusieurs polics manuscrites choisies
+                    sur google fonts et téléchargées en ttf. Fond Noir, dessin blanc. </li>
+                <li>Test du modèle sur ces images par ajout d'un formulaire</li>
+                <li>Elargissement des fonctionnalités en créant un canva permettant de dessiner un digit et de le faire
+                    deviner par l'algorithme</li>
+            </ul>
+
+
+            <h3>Eléments de design et d'accessibilité</h3>
+            <ul>
+                <li>Site responsive grace à l'utilisation de Bootstrap en colmplément du Css.</li>
+                <li>Balises sémantiques html</li>
+                <li>Attribut alt des images</li>
+                <li>Ajout d'un favicon</li>
+                <li>Contraste des couleurs choisies</li>
+                <li>Utilisation aria-label (à consolider)</li>
+                <li>Google Fonts</li>
+            </ul>
+
+            <h3>Mise en ligne du site</h3>
+            <ul>
+                <li>A suivre.</li>
+            </ul>
+
+
+        </div>
+    </div>
+
+</main>
+
+
+{% endblock %}

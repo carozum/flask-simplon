@@ -56,6 +56,9 @@
 
                         <a class="nav-link pl-3 {% if request.path == url_for('logs') %}active{% endif %}"
                             href="{{ url_for('logs') }}">Logs</a>
+
+                        <a class="nav-link pl-3 {% if request.path == url_for('about') %}active{% endif %}"
+                            href="{{ url_for('about') }}">About</a>
                     </div>
                 </div>
             </div>

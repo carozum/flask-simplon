@@ -1,5 +1,6 @@
-{% extends 'layout.html' %} {% block title %} Interactive quotation chart of {{ symbol }} {% endblock %} {% block h1%}
-Quotations Chart {% endblock%} {% block content %}
+{% extends 'layout.html' %} {% block title %} Interactive quotation chart of {{
+symbol }} {% endblock %} {% block h1%} Quotations Chart {% endblock%} {% block
+content %}
 <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item">
@@ -11,54 +12,37 @@ Quotations Chart {% endblock%} {% block content %}
 </nav>
 
 <main class="container p-2 overflow-hidden" style="min-height: 56vh">
-
   <div id="stockChart"></div>
 </main>
 
-  <script>
-    {# Get the dates and prices from Flask route and convert to arrays #}
-    var dates = {{ dates| safe }};
-    var prices = {{ prices| safe }};
-    var symbol = '{{ symbol }}';
-    console.log('Dates:', dates);
-    console.log('Prices:', prices);
-
-    {# Create a Plotly chart using Plotly.newPlot #}
-    var trace = {
-        type: 'scatter',
-        mode: 'lines',
-        x: dates,
-        y: prices,
-        line: { color: 'blue' },
-    };
-    var layout = {
-        title: 'Stock Price Over Time for ' + symbol,
-        xaxis: { title: 'Date' },
-        yaxis: { title: 'Stock Price' },
-        {# pour tester la responsivité, changer la taille de l'écran et recherger la page #}
-        autosize: true,
-        margin: { t: 80, b: 80, l: 80, r: 80 },
-        responsive: true,
-    };
-
-
-    Plotly.newPlot('stockChart', [trace], layout);
-  </script>
-
-  {% endblock %}
-
-  <!-- Container for the Plotly chart -->
-  <!-- <div id="stockChart"></div>
-
 <script>
-    // Get the base64-encoded image data
-    var imgData = "{{ image }}";
+  {# Get the dates and prices from Flask route and convert to arrays #}
+  var dates = {{ dates| safe }};
+  var prices = {{ prices| safe }};
+  var symbol = '{{ symbol }}';
+  console.log('Dates:', dates);
+  console.log('Prices:', prices);
 
-    // Create an Image object from the base64 data
-    var img = new Image();
-    img.src = 'data:image/png;base64,' + imgData;
+  {# Create a Plotly chart using Plotly.newPlot #}
+  var trace = {
+    type: 'scatter',
+    mode: 'lines',
+    x: dates,
+    y: prices,
+    line: { color: 'blue' },
+  };
+  var layout = {
+    title: 'Stock Price Over Time for ' + symbol,
+    xaxis: { title: 'Date' },
+    yaxis: { title: 'Stock Price' },
+        {# pour tester la responsivité, changer la taille de l'écran et recharger la page #}
+    autosize: true,
+      margin: { t: 80, b: 80, l: 80, r: 80 },
+    responsive: true,
+    };
 
-    // Append the image to the stockChart div
-    document.getElementById('stockChart').appendChild(img);
-</script> -->
-</main>
+
+  Plotly.newPlot('stockChart', [trace], layout);
+</script>
+
+{% endblock %}
